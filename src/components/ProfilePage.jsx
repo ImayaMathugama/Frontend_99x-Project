@@ -35,7 +35,8 @@ export default function ProfilePage() {
         ) : user?.role === 'user' ? (
           <Box sx={{ mb: 2 }}>
             <Typography variant="body2" color="textSecondary">
-              Welcome back, valued user! You can view your activities and updates here.
+              Welcome back, {user?.username}!   
+              <br/> <br/>You can view your activities and updates here.
             </Typography>
             {/* Add user-specific content if needed */}
           </Box>

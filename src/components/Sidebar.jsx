@@ -56,10 +56,10 @@ export default function Sidebar({ children }) {
         </ListItemButton>
 
         {role === 'admin' && (
-          <ListItemButton className="sidebar-list-item" onClick={() => navigate('/home')}>
+          <ListItemButton className="sidebar-list-item" onClick={() => navigate('/overview')}>
             <ListItemIcon><OtherHousesIcon /></ListItemIcon>
-            <ListItemText primary="Home" />
-            </ListItemButton>
+            <ListItemText primary="Overview" />
+          </ListItemButton>
         )}
 
 

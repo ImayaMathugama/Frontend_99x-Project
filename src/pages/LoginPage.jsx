@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // ✅ Updated: Use login from AuthContext
@@ -26,7 +26,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    login(username, password); // ✅ Updated
+    login(email, password); // ✅ Updated
   };
 
   const handleFacebookLogin = () => {
@@ -50,12 +50,12 @@ const LoginPage = () => {
 
         <TextField
           className="textfield"
-          label="Username"
+          label="Email"
           variant="outlined"
           fullWidth
           margin="normal"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <TextField

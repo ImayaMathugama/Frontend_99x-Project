@@ -1,7 +1,7 @@
-//Dashboard.jsx
+// Dashboard.jsx
 import React from 'react';
-import { Navigate } from 'react-router-dom'; // ✅ Redirect
-import { useAuth } from '../context/AuthContext'; // ✅ Import context
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import '../components/styles/Sidebar.css';
 import {
   Box,
@@ -51,25 +51,38 @@ const StatCard = ({ title, value, change }) => (
 );
 
 export default function Dashboard() {
-  const { isAuthenticated } = useAuth(); // ✅ Use context
+  const { isAuthenticated, user } = useAuth();
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />; // ✅ Protect
+    return <Navigate to="/login" replace />;
   }
+
+  const isAdmin = user?.role === 'admin';
+  const isUser = user?.role === 'user';
 
   return (
     <Box sx={{ padding: 4 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
-        <Typography variant="h4">Dashboard</Typography>
+        <Typography variant="h4">
+          {isAdmin ? 'Admin Dashboard' : 'User Dashboard'}
+          
+        </Typography>
       </Box>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} md={3}>
-          <StatCard title="Total Revenue" value="$587,684.81" change="+10.5% today" />
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <StatCard title="Total Customers" value="164,540" change="-0.5% today" />
-        </Grid>
+        {/* Admin-only Cards */}
+        {isAdmin && (
+          <>
+            <Grid item xs={12} md={3}>
+              <StatCard title="Total Customers" value="164,540" change="-0.5% today" />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <StatCard title="Total Revenue" value="$1,540,000" change="+8.2% this month" />
+            </Grid>
+          </>
+        )}
+
+        {/* Common to both Admin and User */}
         <Grid item xs={12} md={3}>
           <StatCard title="Total Transactions" value="256,560" change="+5.5% today" />
         </Grid>
@@ -77,6 +90,7 @@ export default function Dashboard() {
           <StatCard title="Total Visitors" value="97,560" change="+15.5% today" />
         </Grid>
 
+        {/* Bar Chart */}
         <Grid item xs={12} md={8}>
           <Card>
             <CardContent sx={{ minWidth: 400 }}>
@@ -93,6 +107,7 @@ export default function Dashboard() {
           </Card>
         </Grid>
 
+        {/* Pie Chart */}
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent sx={{ minWidth: 400 }}>

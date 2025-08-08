@@ -22,7 +22,8 @@ function App() {
       <AuthProvider>
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<Home/>} />
+          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegistrationForm />} />
 
@@ -45,14 +46,7 @@ function App() {
             }
           />
 
-          <Route
-            path="/home"
-            element={
-              <ProtectedRoute>
-                <Sidebar><Home /></Sidebar>
-              </ProtectedRoute>
-            }
-          />
+          
 
           <Route
             path="/contact"
